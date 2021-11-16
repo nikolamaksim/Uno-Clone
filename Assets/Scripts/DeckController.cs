@@ -19,15 +19,15 @@ public class DeckController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            shuffleDeck();
+            //shuffleDeck();
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            StartCoroutine(redealCards());
+            //StartCoroutine(redealCards());
         }
     }
 
-    void shuffleDeck()
+    public void shuffleDeck()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -38,7 +38,7 @@ public class DeckController : MonoBehaviour
         }
     }
 
-    IEnumerator redealCards()
+    public IEnumerator redealCards()
     {
         for (int i = 0; i < beginningCardCount; i++)
         {

@@ -25,8 +25,48 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        initGame();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //StartCoroutine(initGame());
+            initGame();
+        }
+    }
+
+    void initGame()
+    {
+        //collectCards();
         joinPlayers();
         highlightPlayer();
+        //yield return 0;
+        deckController.shuffleDeck();
+        //yield return 0;
+        StartCoroutine(deckController.redealCards());
+    }
+
+    void collectCards()
+    {
+        foreach (var player in deckController.players)
+        {
+            for (int c = 0; c < player.childCount; c++)
+            {
+                var card = player.GetChild(c);
+                card.SetParent(deckController.transform);
+                card.LeanMoveLocal(Vector3.zero, 0.5f).setEaseOutQuint();
+                card.LeanRotate(Vector3.zero, 0.5f).setEaseOutQuint();
+            }
+        }
+        for (int c = 0; c < deckController.stackingDeck.childCount; c++)
+        {
+            var card = deckController.stackingDeck.GetChild(c);
+            card.SetParent(deckController.transform);
+            card.LeanMoveLocal(Vector3.zero, 0.5f).setEaseOutQuint();
+            card.LeanRotate(Vector3.zero, 0.5f).setEaseOutQuint();
+        }
     }
 
     void joinPlayers()

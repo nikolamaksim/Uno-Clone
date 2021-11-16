@@ -59,7 +59,7 @@ public class CrudeAI : MonoBehaviour
         {
             tryToSayUno();
             isDecided = true;
-            Debug.Log(name + ": Challenge Accepted!");
+            //Debug.Log(name + ": Challenge Accepted!");
             gameController.challenge(true);
             return Node.Status.SUCCESS;
         }
@@ -71,7 +71,7 @@ public class CrudeAI : MonoBehaviour
         tryToSayUno();
         isDecided = true;
         gameController.challenge(false);
-        Debug.Log(name + ": Challenge Declined!");
+        //Debug.Log(name + ": Challenge Declined!");
         return Node.Status.SUCCESS;
     }
 
@@ -97,7 +97,7 @@ public class CrudeAI : MonoBehaviour
                 {
                     int randomIndex = Random.Range(0, validCards.Count);
                     validCards[randomIndex].GetComponent<CardMovement>().stackCard_AI();
-                    Debug.Log(name + ": Put Punisher");
+                    //Debug.Log(name + ": Put Punisher");
                     tryToSayUno();
                     isDecided = true;
                     return Node.Status.SUCCESS;
@@ -130,14 +130,14 @@ public class CrudeAI : MonoBehaviour
                 {
                     int randomIndex = Random.Range(0, validCards.Count);
                     validCards[randomIndex].GetComponent<CardMovement>().stackCard_AI();
-                    Debug.Log(name + ": Put any Card");
+                    //Debug.Log(name + ": Put any Card");
                     tryToSayUno();
                     isDecided = true;
                     return Node.Status.SUCCESS;
                 }
             }
         }
-        Debug.Log(name + ": failed to put any card");
+        //Debug.Log(name + ": failed to put any card");
         return Node.Status.FAILURE;
     }
 
@@ -147,7 +147,7 @@ public class CrudeAI : MonoBehaviour
         tryToSayUno();
         isDecided = true;
         deckController.dealCard();
-        Debug.Log(name + ": Cards Dealed!");
+        //Debug.Log(name + ": Cards Dealed!");
         return Node.Status.SUCCESS;
     }
 
@@ -167,13 +167,13 @@ public class CrudeAI : MonoBehaviour
         if (isMyTurn() && !isDecided && !gameController.isReporting)
         {
             float thinkDuration = Time.time - gameController.startTime;
-            if (thinkDuration >= 2f)
+            if (thinkDuration >= 1f)
             {
                 behaviourTree.Process();
             }
         }
 
-        if (!isReportDecided && Time.time - gameController.reportStartTime >= 2f)
+        if (!isReportDecided && Time.time - gameController.reportStartTime >= 3f)
         {
             int randomInt = Random.Range(1, 101);
             if (randomInt <= chanceOfReport)
